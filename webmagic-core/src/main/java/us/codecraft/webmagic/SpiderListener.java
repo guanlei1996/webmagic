@@ -20,4 +20,5 @@ public interface SpiderListener {
         this.onError(request);
     }
 
+    default void onComplete(){};
 }

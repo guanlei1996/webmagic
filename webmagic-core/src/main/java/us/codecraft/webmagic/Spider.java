@@ -353,6 +353,7 @@ public class Spider implements Runnable, Task {
             });
         }
         stat.set(STAT_STOPPED);
+        onComplete();
         // release some resources
         if (destroyWhenExit) {
             close();
@@ -381,6 +382,14 @@ public class Spider implements Runnable, Task {
         if (CollectionUtils.isNotEmpty(spiderListeners)) {
             for (SpiderListener spiderListener : spiderListeners) {
                 spiderListener.onSuccess(request);
+            }
+        }
+    }
+
+    protected void onComplete() {
+        if (CollectionUtils.isNotEmpty(spiderListeners)) {
+            for (SpiderListener spiderListener : spiderListeners) {
+                spiderListener.onComplete();
             }
         }
     }
